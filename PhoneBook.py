@@ -114,7 +114,6 @@ class PhoneBook:
 
     def intcheck(self, num):
         for i in num:
-            print(i)
             if ord(i) > 57 or ord(i) < 48:
                 return False
         return True
@@ -136,7 +135,6 @@ class PhoneBook:
             if FN == "" or LN == "" or MN == "" or PN == "" or EI == "" or IH == "" or NS == "":
                 result = tkMessageBox.showwarning(
                     'Error : All Fields Not Filled', 'Please Complete The Required Fields', icon="warning")
-            print(self.intcheck(MN), self.intcheck(PN))
             if self.intcheck(MN) == False or self.intcheck(PN) == False:
 
                 result = tkMessageBox.showwarning('Error : Invalid Mobile or Phone Number',
@@ -147,10 +145,6 @@ class PhoneBook:
                     f'SELECT * FROM CONTACTS_TABLE WHERE Mobile_Number = {int(MN)}')
                 res = self.cursor.fetchall()
                 if len(res) == 0:
-
-                    print(
-                        F"""INSERT INTO CONTACTS_TABLE VALUES({FN},{LN},{MN},{PN},{EI},{IH},{NS})""")
-
                     self.cursor.execute(F"""INSERT INTO CONTACTS_TABLE VALUES(
                                     '{FN}','{LN}',{MN},{PN},'{EI}','{IH}','{NS}')
                                     """)
