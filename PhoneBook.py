@@ -235,9 +235,9 @@ class PhoneBook:
 
 root = Tk()
 con = sqlite3.connect("Contact.db")
-'''
+
 cur = con.cursor()
-cur.execute("""CREATE TABLE CONTACTS_TABLE(
+cur.execute("""CREATE TABLE IF NOT EXISTS CONTACTS_TABLE(
             First_Name varchar(50),
             Last_Name varchar(50),
             Mobile_Number int PRIMARY KEY,
@@ -247,5 +247,10 @@ cur.execute("""CREATE TABLE CONTACTS_TABLE(
             Notes longtext)           
             """
             )
-'''
+cur.execute("DELETE FROM CONTACTS_TABLE")
+cur.execute("""INSERT INTO CONTACTS_TABLE VALUES
+("Test1","Test1",987642212,12345678,"test1@test1.com","@test1","A Test Contact Card."),
+("Test2","Test2",987643312,12343378,"test2@test2.com","@test2","A Test Contact Card.")
+""")
 cur = PhoneBook(root, con)
+
